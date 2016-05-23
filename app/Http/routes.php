@@ -12,9 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('home');
 });
 
 Route::get('company','CompanyController@index');
 Route::get('company/add','CompanyController@add');
 Route::get('company/{id}','CompanyController@show');
+Route::post('company/create','CompanyController@create');

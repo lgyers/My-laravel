@@ -45,6 +45,29 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if ( config('app.debug') ) {
+            $whoops = new \Whoops\Run;
+        
+            if ($request->ajax()) {
+                $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler());
+            } else {
+                $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+            }
+            return new \Illuminate\Http\Response(
+                $whoops->handleException($e),
+                $e->getStatusCode(),
+                $e->getHeaders()
+            );
+        }
+
+        return \Response::json([
+            'status' => 500,
+            'message' => 'Has Error']);
+        
+        // if ($e instanceof ModelNotFoundException) {
+        //     $e = new NotFoundHttpException($e->getMessage(), $e);
+        // }
+
+        // return parent::render($request, $e);
     }
 }
