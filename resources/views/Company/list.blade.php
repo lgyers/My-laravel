@@ -4,12 +4,22 @@
 	<hr>
 
 	@foreach ($company as $value)
-		<div class="row">
-			<div class="col-xz-4"><img src="http://itjuzi.com/images/{{$value->com_logo_archive}}" alt="{{$value->com_name}}" class="img-circle"></div>
-			<div class="col-xz-8"><a target="_black" href="{{ url('company',$value->com_id) }}"><h2> {{$value->com_name}} </h2></a></div>
-			<article>
-				{{$value->com_des}}
-			</article>
+		<div class="mbr-section__container container mbr-section__container--std-top-padding row">
+			<div class="col-lg-12">
+				<div class="media">
+					<a href="/company/{{ $value->com_id }}" class="pull-left">
+						<img src="https://itjuzi.com/images/{{ $value->com_logo_archive }}" width="40" height="40" alt="" class="media-object">
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"> {{ $value->com_name }} </h4>
+						<p>{{ $value->com_des }}</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	@endforeach
+
+	<div class="mbr-box__magnet mbr-box__magnet--center-center">
+		{!! $company->render() !!}
+	</div>
 @stop
