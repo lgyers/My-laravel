@@ -45,7 +45,7 @@
 		                            	<li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-success" href="{!! url('register') !!}">注册</a></li>
 				                    @else
 				                        <li class="mbr-navbar__item">
-				                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				                            <a href="#" class="btn btn-sm animated" data-toggle="dropdown" role="button" aria-expanded="false">
 				                                {{ Auth::user()->name }} <span class="caret"></span>
 				                            </a>
 				                            <ul class="dropdown-menu" role="menu">
