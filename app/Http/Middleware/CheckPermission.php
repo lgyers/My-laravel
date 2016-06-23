@@ -17,6 +17,7 @@ class CheckPermission
     {
         if (!app('Illuminate\Contracts\Auth\Guard')->guest()) {
             $a = $request->user()->can($permission);
+
             if ($request->user()->can($permission)) {
                 return $next($request);
             }
