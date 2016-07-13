@@ -25,6 +25,7 @@ Route::get('company/add','CompanyController@add');
 Route::get('company/{id}','CompanyController@show');
 Route::post('company/create','CompanyController@create');
 Route::get('role','CompanyController@role');
+Route::get('add_role','CompanyController@add_role');
 
 Route::get('/home', 'HomeController@index');
 
@@ -38,4 +39,13 @@ Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
 
 //admin
-Route::get('/admin','AdminController@index');
+// Route::get('/admin','AdminController@index');
+
+Route::group(['prefix'=>'admin',
+		'namespace' => 'Admin',
+		'middleware' => ['acl', 'acl'],
+		'is' => 'administrator'],
+	function(){
+		Route::get('/company','AdminController@index');
+		Route::get('/article','AdminController@index');
+});
