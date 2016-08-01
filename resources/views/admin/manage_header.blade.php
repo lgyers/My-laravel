@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+{{--  _
+| |    __ _ _   _  ___ _ __
+| |   / _` | | | |/ _ \ '__|
+| |__| (_| | |_| |  __/ |
+|_____\__, |\__, |\___|_|
+      |___/ |___/ --}}
+
 <html lang="en">
 	
 <head>
@@ -6,12 +13,16 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 	{!! Html::style('manage/css/bootstrap.min.css') !!}
 	{!! Html::style('manage/css/AdminLTE.min.css') !!}
 	{!! Html::style('manage/css/skins/_all-skins.min.css') !!}
+	{!! Html::style('manage/css/fonts/fontawesome.css') !!}
+	{!! Html::style('manage/css/ionicons/fonts/ionicons.min.css') !!}
+	{!! Html::style('assets/sweet-alert/sweetalert.css') !!}
+
+	{!! HTML::script('manage/js/jquery-2.2.3.min.js') !!}
 
 </head>
 <body class="hold-transition skin-blue layout-boxed sidebar-mini">
@@ -36,42 +47,18 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-							<span class="hidden-xs">Alexander Pierce</span>
+								<span class="hidden-xs">{{ Auth::user()->name }}</span>
 							</a>
 							<ul class="dropdown-menu">
-							<!-- User image -->
-							<li class="user-header">
-								<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-								<p>
-								Alexander Pierce - Web Developer
-								<small>Member since Nov. 2012</small>
-								</p>
-							</li>
-							<!-- Menu Body -->
-							<li class="user-body">
-								<div class="row">
-								<div class="col-xs-4 text-center">
-									<a href="#">Followers</a>
-								</div>
-								<div class="col-xs-4 text-center">
-									<a href="#">Sales</a>
-								</div>
-								<div class="col-xs-4 text-center">
-									<a href="#">Friends</a>
-								</div>
-								</div>
-							</li>
-							<!-- Menu Footer-->
-							<li class="user-footer">
-								<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">Profile</a>
-								</div>
-								<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Sign out</a>
-								</div>
-							</li>
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+									<a href="#" class="btn btn-default btn-flat">Profile</a>
+									</div>
+									<div class="pull-right">
+									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									</div>
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -85,10 +72,10 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+						<img src="https://www.itjuzi.com/images/7286474166f0954356770aea6f148e60.jpg" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p>{{ Auth::user()->name }}</p>
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
 				</div>
@@ -97,14 +84,14 @@
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="treeview">
-						<a href="#">
+						<a href="{{ URL('admin/') }}">
 							<i class="fa fa-dashboard"></i> <span>后台首页</span>
 							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
+								{{-- <i class="fa fa-angle-left pull-right"></i> --}}
 							</span>
 						</a>
 					</li>
-					<li class="treeview active">
+					<li class="treeview @if ($side_bar == 'company/index') active @endif">
 						<a href="#">
 							<i class="fa fa-files-o"></i>
 							<span>公司管理</span>
@@ -119,16 +106,16 @@
 					</li>
 					<li>
 						<a href="../widgets.html">
-							<i class="fa fa-th"></i> <span>Widgets</span>
-							<span class="pull-right-container">
+							<i class="fa fa-th"></i> <span>文章管理</span>
+							{{-- <span class="pull-right-container">
 							<small class="label pull-right bg-green">new</small>
-							</span>
+							</span> --}}
 						</a>
 					</li>
 					<li class="treeview">
 						<a href="#">
 							<i class="fa fa-pie-chart"></i>
-							<span>Charts</span>
+							<span>用户管理</span>
 							<span class="pull-right-container">
 							<i class="fa fa-angle-left pull-right"></i>
 							</span>
@@ -142,176 +129,16 @@
 					</li>
 					<li class="treeview">
 						<a href="#">
-							<i class="fa fa-laptop"></i>
-							<span>UI Elements</span>
-							<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-							<li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-							<li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-							<li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-							<li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-							<li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-						</ul>
-					</li>
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-edit"></i> <span>Forms</span>
-							<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-							<li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-							<li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-						</ul>
-					</li>
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-table"></i> <span>Tables</span>
-							<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-							<li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="../calendar.html">
-							<i class="fa fa-calendar"></i> <span>Calendar</span>
-							<span class="pull-right-container">
-							<small class="label pull-right bg-red">3</small>
-							<small class="label pull-right bg-blue">17</small>
-							</span>
+							<i class="fa fa-pie-chart"></i>
+							<span>角色管理</span>
 						</a>
 					</li>
-					<li>
-						<a href="../mailbox/mailbox.html">
-							<i class="fa fa-envelope"></i> <span>Mailbox</span>
-							<span class="pull-right-container">
-							<small class="label pull-right bg-yellow">12</small>
-							<small class="label pull-right bg-green">16</small>
-							<small class="label pull-right bg-red">5</small>
-							</span>
-						</a>
-					</li>
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-folder"></i> <span>Examples</span>
-							<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="../examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-							<li><a href="../examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-							<li><a href="../examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-							<li><a href="../examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-							<li><a href="../examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-							<li><a href="../examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-							<li><a href="../examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-							<li><a href="../examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-							<li><a href="../examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-						</ul>
-					</li>
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-share"></i> <span>Multilevel</span>
-							<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-							<li>
-							<a href="#"><i class="fa fa-circle-o"></i> Level One
-								<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-								<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Level Two
-									<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-									</span>
-								</a>
-								<ul class="treeview-menu">
-									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-								</ul>
-								</li>
-							</ul>
-							</li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-						</ul>
-					</li>
-					<li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
 				</ul>
 			</section>
 			<!-- /.sidebar -->
 		</aside>
 
 		<!-- Content Wrapper. Contains page content -->
-		{{-- <div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					Boxed Layout
-					<small>Blank example to the boxed layout</small>
-				</h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="#">Layout</a></li>
-					<li class="active">Boxed</li>
-				</ol>
-			</section>
-
-			<!-- Main content -->
-			<section class="content">
-				<div class="callout callout-info">
-					<h4>Tip!</h4>
-
-					<p>Add the layout-boxed class to the body tag to get this layout. The boxed layout is helpful when working on
-					large screens because it prevents the site from stretching very wide.</p>
-				</div>
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-					<h3 class="box-title">Title</h3>
-
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-						<i class="fa fa-minus"></i></button>
-						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-						<i class="fa fa-times"></i></button>
-					</div>
-					</div>
-					<div class="box-body">
-					Start creating your amazing application!
-					</div>
-					<!-- /.box-body -->
-					<div class="box-footer">
-					Footer
-					</div>
-					<!-- /.box-footer-->
-				</div>
-				<!-- /.box -->
-			</section>
-			<!-- /.content -->
-		</div> --}}
-
 		@yield('content')
 
 		<footer class="main-footer">
@@ -322,12 +149,13 @@
 			reserved.
 		</footer>
 	</div>
-	{!! HTML::script('manage/js/jquery-2.2.3.min.js') !!}
+	
 	{!! HTML::script('manage/js/bootstrap.min.js') !!}
 	{!! HTML::script('manage/js/jquery.slimscroll.min.js') !!}
 	{!! HTML::script('manage/js/fastclick.js') !!}
 	{!! HTML::script('manage/js/app.min.js') !!}
 	{!! HTML::script('manage/js/demo.js') !!}
+	{!! HTML::script('assets/sweet-alert/sweetalert.min.js') !!}
 
 </body>
 

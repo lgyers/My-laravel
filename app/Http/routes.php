@@ -46,6 +46,9 @@ Route::group(['prefix'=>'admin',
 		'middleware' => ['acl', 'acl'],
 		'is' => 'administrator'],
 	function(){
-		Route::get('/company','AdminController@index');
+		Route::get('/','AdminController@index');
+		Route::get('/company', ['as' => 'admin.company.index', 'uses' => 'CompanyController@index']);
+		Route::get('/company/edit/{id}','CompanyController@edit');
+		Route::get('/company/destroy/{id}','CompanyController@destroy');
 		Route::get('/article','AdminController@index');
 });

@@ -11,11 +11,10 @@ use App\Company;
 
 class AdminController extends Controller
 {
-    public function index() {
-
-    	$company = Company::where('com_show','0')->orderBy('com_id','desc')->paginate(15);
+    public function index()
+    {
     	$side_bar = 'company/index';
-        return view('admin.index.index',compact('company','side_bar'));
+        return view('admin.index.index',compact('side_bar'));
     }
 
     public function article()

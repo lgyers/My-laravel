@@ -10,8 +10,18 @@ class Company extends Model
 	protected $primaryKey = 'com_id';
 	protected $hidden     = array('pivot');
 
+
+
+	public function getCompany($limit = 15)
+	{
+		return $this->where('com_show',0)->orderBy('com_id','desc')
+					->with('contributor')
+					->paginate($limit);
+	}
+
 	public function contributor()
 	{
-		return $this->hasOne('App\Com_contribution','item_id','com_id');
+		// return $this->hasOne('App\Com_contribution','item_id','com_id');
+		return $this->belongsTo(Contributor::class, 'com_id', 'item_id');
 	}
 }

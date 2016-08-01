@@ -1,77 +1,81 @@
 @extends('admin.manage_header')
 @section('content')
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			Boxed Layout
-			<small>Blank example to the boxed layout</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">公司管理</a></li>
-			<li class="active">国内公司管理</li>
-		</ol>
-	</section>
+<!-- Small boxes (Stat box) -->
+	<div class="content-wrapper">
+		<section class="content">
+			<div class="row">
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3>150</h3>
 
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">公司列表</h3>
+						<p>New Orders</p>
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<table id="example2" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>公司 ID</th>
-									<th>公司名称</th>
-									<th>创建时间</th>
-									<th>管理员</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach ($company as $value)
-									<tr>
-										<td>{{ $value->com_id }}</td>
-										<td>{{ $value->com_name }}</td>
-										<td>Win 95+</td>
-										<td>4</td>
-										<td>
-											<a href="{{ URL::to('admin/company/edit/'.$value->com_id) }}" class="btn btn-warning">编辑</a>
-											<a href="" class="btn btn-danger" data-toggle="modal" data-url="{{URL::to('admin/company/delete/'.$value->com_id)}}" data-target="#delete-modal">删除</a>
-										</td>
-									</tr>
-								@endforeach
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>公司ID</th>
-									<th>公司名称</th>
-									<th>创建时间</th>
-									<th>管理员</th>
-									<th>操作</th>
-								</tr>
-							</tfoot>
-						</table>
-						<div class="row">
-							<div class="col-sm-5">
-							</div>
-							<div class="col-sm-7">
-								{!! $company->render() !!}
-							</div>
-						</div>
+					<div class="icon">
+						<i class="fa fa-shopping-cart"></i>
 					</div>
-					<!-- /.box-body -->
+					<a href="#" class="small-box-footer">
+						More info <i class="fa fa-arrow-circle-right"></i>
+					</a>
+					</div>
 				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-green">
+					<div class="inner">
+						<h3>53<sup style="font-size: 20px">%</sup></h3>
+
+						<p>Bounce Rate</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-stats-bars"></i>
+					</div>
+					<a href="#" class="small-box-footer">
+						More info <i class="fa fa-arrow-circle-right"></i>
+					</a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3>44</h3>
+
+						<p>User Registrations</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="#" class="small-box-footer">
+						More info <i class="fa fa-arrow-circle-right"></i>
+					</a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-red">
+					<div class="inner">
+						<h3>65</h3>
+
+						<p>Unique Visitors</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-pie-graph"></i>
+					</div>
+					<a href="#" class="small-box-footer">
+						More info <i class="fa fa-arrow-circle-right"></i>
+					</a>
+					</div>
+				</div>
+				<!-- ./col -->
 			</div>
-		</div>
-	</section>
-	<!-- /.content -->
-</div>
-@include('pjax::pjax')
+		</section>
+	</div>
+
+	@include('pjax::pjax')
+	<!-- /.row -->
 @stop
