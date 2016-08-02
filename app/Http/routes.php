@@ -49,6 +49,7 @@ Route::group(['prefix'=>'admin',
 		Route::get('/','AdminController@index');
 		Route::get('/company', ['as' => 'admin.company.index', 'uses' => 'CompanyController@index']);
 		Route::get('/company/edit/{id}','CompanyController@edit');
+		Route::post('/company/update/{id}', ['as' => 'admin.company.update', 'uses' => 'CompanyController@update']);
 		Route::get('/company/destroy/{id}','CompanyController@destroy');
 		Route::get('/article','AdminController@index');
 });

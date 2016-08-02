@@ -18,6 +18,22 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
+				@if (Session::has('success'))
+					<div id="success-message" class="alert alert-success alert-dismissible" style="background-color: #24ce7b !important;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h4><i class="icon fa fa-check"></i> 成功提示!</h4>
+						{{Session::get('success')}}
+					</div>
+				@else
+					<div id="errors-message" class="alert alert-danger alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+							&times;
+						</button>
+						<h4><i class="icon fa fa-ban"></i> 错误提示!</h4>
+						{{Session::get('error')}}
+					</div>
+				@endif
+				
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">公司列表</h3>
@@ -80,6 +96,7 @@
 		$('a[data-confirm]').click(function(ev) {
 
 			var href = $(this).attr('data-url');
+			var btn = $(this);
 			swal({
 				title: "Are you sure?",
 				text: "确定删除此公司?不可挽回",
@@ -96,7 +113,7 @@
 						dataType: 'html',
 						success: function() {
 							swal("Done!", "It was succesfully deleted!", "success");
-							
+							btn.closest('tr').remove();
 						},
 						error: function() {
 							swal("Error deleting!", "Please try again", "error");
