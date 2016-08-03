@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,10 +13,13 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 class AuthController extends Controller
 {
 
-	public $redirectPath = '/company';
+	//成功登录后转向的页面:
+	public $redirectPath = '/';
 
+	//登录失败后转向的页面:
 	public $loginPath = '/login';
 
+	//退出登录后转向的页面:
 	public $redirectAfterLogout = '/login';
 	/*
 	|--------------------------------------------------------------------------

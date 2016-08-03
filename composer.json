@@ -11,9 +11,9 @@
         "guzzlehttp/guzzle": "6.2",
         "laravelcollective/html": "~5.1",
         "barryvdh/laravel-debugbar": "^2.2",
-        "kodeine/laravel-acl": "~1.0@dev",
         "predis/predis": "~1.0",
-        "yuanchao/pjax-for-laravel-5": "dev-master"
+        "yuanchao/pjax-for-laravel-5": "dev-master",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

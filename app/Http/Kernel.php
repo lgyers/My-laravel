@@ -31,6 +31,11 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         // 'acl' => \App\Http\Middleware\CheckPermission::class,
-        'acl' => \Kodeine\Acl\Middleware\HasPermission::class,
+        // 'acl' => \Kodeine\Acl\Middleware\HasPermission::class,
+
+        'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
+        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
+        'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
+        'admin' => \App\Http\Middleware\Admin::class,
     ];
 }

@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\Models\Company;
+use App\Models\User;
 use Kodeine\Acl\Models\Eloquent\Permission;
 use Kodeine\Acl\Models\Eloquent\Role;
-
-use App\Company;
-use App\User;
-// use App\Role;
 use Request;
 
 class CompanyController extends Controller

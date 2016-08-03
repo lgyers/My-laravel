@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Scope;
+use App\Http\Requests\CompanyRequest;
+use App\Models\Company;
+use App\Models\Scope;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
-use App\Http\Requests\CompanyRequest;
 
 class CompanyController extends Controller
 {
