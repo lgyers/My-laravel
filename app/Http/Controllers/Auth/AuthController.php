@@ -147,16 +147,16 @@ class AuthController extends Controller
         $user = $this->create($request->all());
         if ($user) {
 
-	        Mail::send('emails.test', ['user' => $user], function ($email) use ($user) {
+	        Mail::queue('emails.test', ['user' => $user], function ($email) use ($user) {
 	        	$email->from('330395508@qq.com', '欢迎注册');
 	            $email->to($user->email)->subject('欢迎注册');
 	        });
 
-	        flash('注册成功!');
+	        flash('注册成功！', 'success');
 	        return redirect($this->redirectPath());
         }else{
 
-        	flash('注册失败');
+        	flash('注册失败', 'danger');
 	        return redirect($this->redirectPath());
         }
 
