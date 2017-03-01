@@ -1,0 +1,1 @@
+{{ $user->name }}你好，欢迎注册My_Laravel

@@ -3,7 +3,7 @@
 return [
 
     /* 后台登录页面背景图片 */
-    'background-images'            => [
+    'background-images' => [
         '/assets/images/background/1.jpg',
         '/assets/images/background/2.jpg',
         '/assets/images/background/3.jpg',
@@ -154,6 +154,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         YuanChao\Pjax\EndaPjaxServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
         /*
          * Application Service Providers...

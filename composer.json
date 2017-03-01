@@ -13,7 +13,8 @@
         "barryvdh/laravel-debugbar": "^2.2",
         "predis/predis": "~1.0",
         "yuanchao/pjax-for-laravel-5": "dev-master",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "laracasts/flash": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

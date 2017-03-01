@@ -30,14 +30,4 @@ class CompanyRequest extends Request
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'com_name.required' => '公司名称不能为空',
-            'com_des.required'  => '公司简介不能为空',
-            'com_url.required'  => '公司网址不能为空',
-        ];
-    }
-
-
 }

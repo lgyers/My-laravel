@@ -9,12 +9,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests\UserRequest;
+use Mail;
 
 class AuthController extends Controller
 {
 
 	//成功登录后转向的页面:
-	public $redirectPath = '/';
+	public $redirectPath = '/register';
 
 	//登录失败后转向的页面:
 	public $loginPath = '/login';
@@ -128,4 +130,36 @@ class AuthController extends Controller
 			'password' => bcrypt($data['password']),
 		]);
 	}
+
+	public function getRegister()
+    {
+        return view('auth.register');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(UserRequest $request)
+    {
+        $user = $this->create($request->all());
+        if ($user) {
+
+	        Mail::send('emails.test', ['user' => $user], function ($email) use ($user) {
+	        	$email->from('330395508@qq.com', '欢迎注册');
+	            $email->to($user->email)->subject('欢迎注册');
+	        });
+
+	        flash('注册成功!');
+	        return redirect($this->redirectPath());
+        }else{
+
+        	flash('注册失败');
+	        return redirect($this->redirectPath());
+        }
+
+    }
+
 }
