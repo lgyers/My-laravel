@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -11,10 +12,12 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
-            'password' => bcrypt('secret'),
+        Role::create([
+            'name'   => 'user'
+        ]);
+
+        Role::create([
+            'name'   => 'super-admin'
         ]);
     }
 }

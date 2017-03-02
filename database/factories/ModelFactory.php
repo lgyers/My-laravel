@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -17,5 +18,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
+    return [
+		'name'       => $faker->userName,
+		'email'      => $faker->email,
+		'password'   => $faker->password,
+		'activated'  => '1',
+		'created_at' => Carbon::now()->toDateTimeString(),
+		'updated_at' => Carbon::now()->toDateTimeString(),
     ];
 });
