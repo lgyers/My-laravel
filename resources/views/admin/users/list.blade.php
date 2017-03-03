@@ -89,7 +89,6 @@
 	</section>
 	<!-- /.content -->
 </div>
-@include('pjax::pjax')
 
 <script>
 	$(document).ready(function() {

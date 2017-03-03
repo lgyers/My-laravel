@@ -5,7 +5,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Boxed Layout
+			编辑用户信息
 			<small>Blank example to the boxed layout</small>
 		</h1>
 		<ol class="breadcrumb">
@@ -20,30 +20,29 @@
 		{!! Form::open(['route' => 'admin.users.update', 'files' => true]) !!}
 			<div class="form-group">
 				{!! Form::label('email', 'Email:') !!}
-				{!! Form::text('email', null, ['class' => 'form-control']) !!}
+				{!! Form::text('email', $userInfo->email, ['class' => 'form-control']) !!}
 			</div>
 
 			<div class="form-group">
 				{!! Form::label('name', 'Name:') !!}
-				{!! Form::text('name', null, ['class' => 'form-control']) !!}
+				{!! Form::text('name', $userInfo->name, ['class' => 'form-control']) !!}
 			</div>
 
 			<div class="form-group">
-				{!! Form::label('thumbnail', 'Thumbnail:') !!}
-				{!! Form::file('thumbnail') !!}
+				{!! Form::label('thumbnail', '头像:') !!}
+				{!! Form::file('user_logo') !!}
 			</div>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				{!! Form::label('des', 'Body:') !!}
-				{!! Form::textarea('des', null, ['class' => 'form-control']) !!}
-			</div>
+				{!! Form::textarea('des', $userInfo->email, ['class' => 'form-control']) !!}
+			</div> -->
 
 			<div class="form-group">
-				{!! Form::submit('Create Post', ['class' => 'btn btn-primary']) !!}
+				{!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
 			</div>
 	</section>
 	<!-- /.content -->
 </div>
-@include('pjax::pjax')
 
 @stop

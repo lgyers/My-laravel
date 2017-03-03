@@ -153,7 +153,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        YuanChao\Pjax\EndaPjaxServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
 
         /*
@@ -166,6 +165,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -220,6 +220,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

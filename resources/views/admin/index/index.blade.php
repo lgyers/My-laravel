@@ -76,6 +76,5 @@
 		</section>
 	</div>
 
-	@include('pjax::pjax')
 	<!-- /.row -->
 @stop

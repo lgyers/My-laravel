@@ -112,8 +112,8 @@
 							</span> --}}
 						</a>
 					</li>
-					<li class="treeview">
-						<a href="{{ url('admin/user') }}">
+					<li class="treeview @if ($side_bar == 'users/list') active @endif">
+						<a href="{{ url('admin/users') }}">
 							<i class="fa fa-pie-chart"></i>
 							<span>用户管理</span>
 							<span class="pull-right-container">

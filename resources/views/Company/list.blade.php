@@ -23,4 +23,3 @@
 		{!! $company->render() !!}
 	</div>
 @stop
-@include('pjax::pjax')
