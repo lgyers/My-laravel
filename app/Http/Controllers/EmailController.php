@@ -15,9 +15,11 @@ class EmailController extends Controller
     {
     	$user = User::find($id);
 
-        Mail::send('emails.test', $user, function ($email) use ($user) {
-        	$email->from('330395508@qq.com', 'LYT');
-            $email->to($user->email,$user->username)->subject('欢迎注册');
+        Mail::send('emails.test', ['user' => $user], function ($email) use ($user) {
+        	$email->from('330395508@qq.com', '欢迎注册');
+            $email->to('330395508@qq.com')->subject('欢迎注册-来自本地测试邮件');
         });
+
+        echo "Send success !";
     }
 }

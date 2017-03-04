@@ -15,8 +15,8 @@
 Route::get('/home', 'HomeController@index')->name('welcome');
 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('home');
+	// return view('welcome');
+	return view('home');
 });
 
 //前台公司路由
@@ -26,7 +26,9 @@ Route::get('company',[
 	'uses'=>'CompanyController@index']);
 
 // Route::get('company/add','CompanyController@add');
-Route::get('company/{id}', ['as' => 'company.info', 'uese' => 'CompanyController@show']);
+Route::get('img', ['uses' => 'CompanyController@img_test']);
+Route::get('send/{id}', ['uses' => 'EmailController@send']);
+Route::get('company/{id}', ['as' => 'company.info', 'uses' => 'CompanyController@show']);
 // Route::post('company/create','CompanyController@create');
 
 // 认证路由...
@@ -45,10 +47,18 @@ Route::group(['prefix'=>'admin',
 		'middleware' => ['admin', 'auth'],
 		'is'         => 'administrator'],
 	function(){
+
+		//公司模块
 		Route::get('/','AdminController@index')->name('admin.index');
 		Route::get('/company', ['as' => 'admin.company.index', 'uses' => 'CompanyController@index']);
 		Route::get('/company/edit/{id}', ['as' => 'admin.company.edit', 'uses' => 'CompanyController@edit']);
 		Route::post('/company/update/{id}', ['as' => 'admin.company.update', 'uses' => 'CompanyController@update']);
 		Route::get('/company/destroy/{id}', ['as' => 'admin.company.destroy', 'uses' => 'CompanyController@destroy']);
 		Route::get('/article','AdminController@index');
+
+		//用户模块
+		Route::get('/users','UsersController@index')->name('admin.users.index');
+		Route::get('/users/edit/{id}', ['as' => 'admin.users.edit', 'uses' => 'UsersController@edit']);
+		Route::post('/users/update/{id}', ['as' => 'admin.users.update', 'uses' => 'UsersController@update']);
+		Route::get('/users/destroy/{id}', ['as' => 'admin.users.destroy', 'uses' => 'UsersController@destroy']);
 });
