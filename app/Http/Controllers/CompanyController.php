@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Models\Company;
 use App\Models\User;
 use Kodeine\Acl\Models\Eloquent\Permission;
 use Kodeine\Acl\Models\Eloquent\Role;
+use Intervention\Image\ImageManagerStatic as Image;
 use Request;
+use Cache;
 
 class CompanyController extends Controller
 {
@@ -22,8 +22,15 @@ class CompanyController extends Controller
 
     public function show($id)
     {
-        $com_info = Company::find($id);
-        // return $company;
+        $com_key = 'Company_detail_' . $id;
+
+        if ( Cache::has($com_key) ) {
+            $com_info = Cache::get($com_key);
+        }else{
+            $com_info = Company::find($id);
+            Cache::forever($com_key,$com_info);
+        }
+        
         return view('Company.detail',compact('com_info'));
     }
 
@@ -38,79 +45,9 @@ class CompanyController extends Controller
         return $com_info;
     }
 
-    public function role()
+    public function img_test()
     {
-        // echo Role::with('permissions')->get();
-        $roleAdmin = new Role();
-        $roleAdmin->name = 'Administrator';
-        $roleAdmin->slug = 'administrator';
-        $roleAdmin->description = 'manage administration privileges';
-        $roleAdmin->save();
-    }
-
-    public function admin_test()
-    {
-        echo "admin-test success!";
-    }
-
-    public function add_role()
-    {
-        // $roleAdmin = Role::find(1);
-        // $user = User::find(1);
-        // // by object
-        // $user->assignRole($roleAdmin);
-        // // or by id
-        // $user->assignRole($roleAdmin->id);
-        // // or by just a slug
-        // $user->assignRole('administrator');
-
-        // $user = User::first();
-        // return $user->getRoles();
-
-        //permission
-        // $permission = new Permission();
-        // $permUser = $permission->create([ 
-        //     'name'        => 'user',
-        //     'slug'        => [          // pass an array of permissions.
-        //         'create'     => true,
-        //         'view'       => true,
-        //         'update'     => true,
-        //         'delete'     => true,
-        //         'view.phone' => true
-        //     ],
-        //     'description' => 'manage user permissions'
-        // ]);
-
-        // $permission = new Permission();
-        // $permPost = $permission->create([ 
-        //     'name'        => 'post',
-        //     'slug'        => [          // pass an array of permissions.
-        //         'create'     => true,
-        //         'view'       => true,
-        //         'update'     => true,
-        //         'delete'     => true,
-        //     ],
-        //     'description' => 'manage post permissions'
-        // ]);
-
-
-        // $roleAdmin = Role::first(); // administrator
-        // // permission as an object
-        // $roleAdmin->assignPermission($permUser);
-        // // as an id
-        // $roleAdmin->assignPermission($permUser->id);
-        // // or by name
-        // $roleAdmin->assignPermission('user');
-        // // or by collection
-        // $roleAdmin->assignPermission(Permission::all());
-        // echo "success";
-
-        $user = User::first();
-        dump($user->getPermissions());
-
-        $user = User::first();
-        // $user->is('administrator');
-        $a = $user->isAdministrator();
-        // dump($a);exit();
+        $img = Image::make('public/1470295965-xixi.jpeg')->resize(300, 200);
+        return $img->response('jpg');
     }
 }
