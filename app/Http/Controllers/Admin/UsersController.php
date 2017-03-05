@@ -83,8 +83,8 @@ class UsersController extends Controller
         $user->name = Input::get('name');
         // $user->des = Input::get('des');
 
-        if (Input::hasFile('thumbnail')) {
-            $file = Input::file('thumbnail');
+        if (Input::hasFile('user_logo')) {
+            $file = Input::file('user_logo');
             $name = time().'-'.$file->getClientOriginalName();
             $file = $file->move(public_path().'/images/', $name);
             $user->logo = $name;

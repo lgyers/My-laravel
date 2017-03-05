@@ -29,8 +29,14 @@
 			</div>
 
 			<div class="form-group">
-				{!! Form::label('thumbnail', '头像:') !!}
+				{!! Form::label('user_logo', '头像:') !!}
 				{!! Form::file('user_logo') !!}
+				<!-- <span class="btn btn-success fileinput-button">
+			        <i class="glyphicon glyphicon-plus"></i>
+			        <span>Select files...</span>
+			        The file input field used as target for the file upload widget
+			        <input id="fileupload" type="file" name="thumbnail" multiple>
+			    </span> -->
 			</div>
 
 			<!-- <div class="form-group">
